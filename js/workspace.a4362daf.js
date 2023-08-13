@@ -387,6 +387,7 @@ parcelRequire = function (e, r, t, n) {
                 d.addEventListener("click", function (e) {
                     i.appendChild(o), r.play()
                     a.element.classList.add("active");
+                    document.querySelector(".container").style.display = "none";
                 });
             }
 
