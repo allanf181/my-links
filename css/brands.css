@@ -1067,6 +1067,7 @@ button:hover,
   filter: brightness(90%);
 }
 
+/* Mini3D */
 .button.button-mini3d {
   color: #FFFFFF;
   background-color: #000000;
@@ -1074,5 +1075,15 @@ button:hover,
 }
 .button.button-mini3d:hover,
 .button.button-mini3d:focus {
+  filter: brightness(90%);
+}
+
+/* Privacy */
+.button.button-privacy {
+  color: #ffffff;
+  background-color: #ff6b28;
+}
+.button.button-privacy:hover,
+.button.button-privacy:focus {
   filter: brightness(90%);
 }

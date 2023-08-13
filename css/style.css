@@ -4,7 +4,7 @@ canvas {
     image-rendering: pixelated
 }
 
-canvas.active {
+.active {
     position: fixed;
     z-index: 999;
     bottom: 0;
