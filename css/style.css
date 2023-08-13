@@ -1,0 +1,29 @@
+canvas {
+    image-rendering: auto;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated
+}
+
+canvas.active {
+    position: fixed;
+    z-index: 999;
+    bottom: 0;
+    right: 0;
+}
+
+button:active {
+    transform: scale(.95);
+    opacity: .5
+}
+
+audio {
+    position: absolute;
+    width: 0;
+    height: 0;
+    visibility: hidden
+}
+
+/*
+    Copyright Matías Martínez
+    From: https://matias.ma/nsfw/
+*/
