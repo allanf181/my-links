@@ -11,6 +11,10 @@ canvas.active {
     right: 0;
 }
 
+button.button-onlyfans {
+    transition: all .15s ease-out
+}
+
 button:active {
     transform: scale(.95);
     opacity: .5
@@ -23,7 +27,21 @@ audio {
     visibility: hidden
 }
 
+@keyframes Cue-In {
+    0% {
+        opacity: 0;
+        transform: scale(.1) rotateX(45deg)
+    }
+    to {
+        transform: scale(1) rotateX(0)
+    }
+}
+
+.cue-in {
+    animation: Cue-In 2s ease-in-out
+}
+
 /*
     Copyright Matías Martínez
-    From: https://matias.ma/nsfw/
+    From:
 */
