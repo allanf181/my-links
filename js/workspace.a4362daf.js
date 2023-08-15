@@ -254,14 +254,14 @@ parcelRequire = function (e, r, t, n) {
 
         require("./RoundedRect.js");
         var d = function (r) {
-            function n() {
+            function n(a) {
                 var e;
                 u(this, n), (e = s(this, f(n).call(this))).backgroundColor = "#000", e.containerColor = "#000", e.entities = [];
                 var i = new Image;
                 return i.onload = function () {
-                    var r = 33, n = 29, o = new t.default(i, t.default.GeometryHorizontalLinear(r, n, 4));
-                    e.sprites = {ditto: o}, e.main()
-                }, i.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAAAdAgMAAAAWQyy/AAAADFBMVEX///+4YOA4ODj4+PhASPNeAAAAAXRSTlMAQObYZgAAAStJREFUeF6l08FqhEAMBuBhbk6fYyj6Pgmul3pZEN9hWV8i9FgvC3X6PELpe2zP9Y/pyCLLFprLoP83STzo/lv+/ZEoGGwMw10RacmePmML4PfOjyqev6WGKDs/Kth40QiEXInxLPzxle+WHUS8kgoi6vU8zzaobIQB31R4QrU4T9RVKl5ngpheaBP1KlmWLlU4z0iCJioORKxCmzm5nDSJAOx0jxthdEBwzOLIkJyFIEGgQpvVqxSMhVRxQKCiEYhozQtbPV/Fmx6iJE5ErYkWgi8mlOYkEiVZxQRpglUojSZB9wJUTDoxkTeMN4J3ot0JT79CTMifRUmUEtV5803EJcD3+5ScS+MmML+feHBhCcKSWOVvw9s07H+LTdwvL/1Fp9yvaggJUx/WD0e0wREEScedAAAAAElFTkSuQmCC", e
+                    var r = a ? 355 : 33, n = a ? 213 : 29, o = new t.default(i, t.default.GeometryHorizontalLinear(r, n, a ? 16 : 4));
+                    e.sprites = {ditto: o, not: !!a}, e.main()
+                }, i.src = a ? "./images/output.png" : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAAAdAgMAAAAWQyy/AAAADFBMVEX///+4YOA4ODj4+PhASPNeAAAAAXRSTlMAQObYZgAAAStJREFUeF6l08FqhEAMBuBhbk6fYyj6Pgmul3pZEN9hWV8i9FgvC3X6PELpe2zP9Y/pyCLLFprLoP83STzo/lv+/ZEoGGwMw10RacmePmML4PfOjyqev6WGKDs/Kth40QiEXInxLPzxle+WHUS8kgoi6vU8zzaobIQB31R4QrU4T9RVKl5ngpheaBP1KlmWLlU4z0iCJioORKxCmzm5nDSJAOx0jxthdEBwzOLIkJyFIEGgQpvVqxSMhVRxQKCiEYhozQtbPV/Fmx6iJE5ErYkWgi8mlOYkEiVZxQRpglUojSZB9wJUTDoxkTeMN4J3ot0JT79CTMifRUmUEtV5803EJcD3+5ScS+MmML+feHBhCcKSWOVvw9s07H+LTdwvL/1Fp9yvaggJUx/WD0e0wREEScedAAAAAElFTkSuQmCC", e
             }
 
             return p(n, e.default), h(n, [{
@@ -270,7 +270,7 @@ parcelRequire = function (e, r, t, n) {
                 }
             }, {
                 key: "createEntity", value: function () {
-                    var t = this.sprites.ditto, e = t.frames[0], r = i.integerValue(0, 1), n = i.integerValue(4, 16),
+                    var t = this.sprites.ditto, e = t.frames[0], r = i.integerValue(0, 1), n = i.integerValue((this.sprites.not) ? 1 : 4, (this.sprites.not) ? 2 : 16),
                         o = i.floatValue(.1, 1), a = i.integerValue(400, 1e3) * (r ? 1 : -1), u = this.size.width,
                         l = this.size.height, h = {width: e.width, height: e.height},
                         s = {width: h.width * n, height: h.height * n};
@@ -375,25 +375,53 @@ parcelRequire = function (e, r, t, n) {
         var o = function () {
             function n(i) {
                 t(this, n), this.container = i;
-                var a = new e.default;
-                a.element.style.display = "none", i.appendChild(a.element), window.addEventListener("resize", this.handleResize.bind(this)), this.scene = a, this.handleResize();
-                var o = document.createElement("span");
-                o.textContent = "Preparing…";
-                var r = document.getElementsByTagName("audio")[0];
-                r.addEventListener("play", function () {
-                    o.parentNode.removeChild(o), a.element.classList.add("cue-in"), a.element.style.display = "block", document.title = "Conga!"
-                });
-                var d = document.querySelector(".button-onlyfans");
-                d.addEventListener("click", function (e) {
-                    i.appendChild(o), r.play()
-                    a.element.classList.add("active");
-                    document.querySelector(".container").style.display = "none";
-                });
+                let createElementInstance = (num) => {
+                    let instance = new e.default(num);
+                    instance.element.style.display = "none";
+                    i.appendChild(instance.element);
+                    return instance;
+                };
+
+                let handleAudioPlay = (audioElementIndex, elementInstance, title) => {
+                    let audioElement = document.getElementsByTagName("audio")[audioElementIndex];
+                    audioElement.addEventListener("play", function () {
+                        spanElement.parentNode.removeChild(spanElement);
+                        elementInstance.element.classList.add("cue-in");
+                        elementInstance.element.style.display = "block";
+                        document.title = atob(title);
+                    });
+                };
+
+                let handleClick = (selector, audioElementIndex, elementInstance) => {
+                    let button = document.querySelector(selector);
+                    button.addEventListener("click", function (e) {
+                        i.appendChild(spanElement);
+                        document.getElementsByTagName("audio")[audioElementIndex].play();
+                        elementInstance.element.classList.add("active");
+                        document.querySelector(".container").style.display = "none";
+                    });
+                };
+
+                let a = createElementInstance();
+                let a2 = createElementInstance(1);
+
+                window.addEventListener("resize", this.handleResize.bind(this));
+                this.scenes = [a, a2];
+                this.handleResize();
+
+                let spanElement = document.createElement("span");
+                spanElement.textContent = "Preparing...";
+
+                handleAudioPlay(0, a, "Q29uZ2Eh");
+                handleAudioPlay(1, a2, "WW91J3ZlIGJlZW4gcmlja3JvbGxlZCE=");
+
+                handleClick(".button-onlyfans", 0, a);
+                handleClick(".button-privacy", 1, a2);
             }
 
             return a(n, [{
                 key: "handleResize", value: function () {
-                    this.scene.size = {width: Math.floor(window.innerWidth), height: Math.floor(window.innerHeight)}
+                    this.scenes.forEach(scene => scene.size = {width: Math.floor(window.innerWidth), height: Math.floor(window.innerHeight)})
                 }
             }]), n
         }();
