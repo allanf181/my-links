@@ -392,18 +392,27 @@ parcelRequire = function (e, r, t, n) {
                     });
                 };
 
-                let handleClick = (selector, audioElementIndex, elementInstance) => {
-                    let button = document.querySelector(selector);
-                    button.addEventListener("click", function (e) {
-                        i.appendChild(spanElement);
-                        document.getElementsByTagName("audio")[audioElementIndex].play();
-                        elementInstance.element.classList.add("active");
-                        document.querySelector(".container").style.display = "none";
-                    });
-                };
-
                 let a = createElementInstance();
                 let a2 = createElementInstance(1);
+
+                let handleClick = (selector, link) => {
+                    let button = document.querySelector(selector);
+                    let audioElementIndex = {
+                        onlyfans: 0,
+                        privacy: 1
+                    }
+                    let elementInstance = {
+                        onlyfans: a,
+                        privacy: a2
+                    }
+                    button.addEventListener("click", function (e) {
+                        i.appendChild(spanElement);
+                        document.getElementsByTagName("audio")[audioElementIndex[link]].play();
+                        elementInstance[link].element.classList.add("active");
+                        document.querySelector(".container").style.display = "none";
+                        document.querySelector("#popup-overlay").removeAttribute("data-enabled");
+                    });
+                };
 
                 window.addEventListener("resize", this.handleResize.bind(this));
                 this.scenes = [a, a2];
@@ -415,8 +424,7 @@ parcelRequire = function (e, r, t, n) {
                 handleAudioPlay(0, a, "Q29uZ2Eh");
                 handleAudioPlay(1, a2, "WW91J3ZlIGJlZW4gcmlja3JvbGxlZCE=");
 
-                handleClick(".button-onlyfans", 0, a);
-                handleClick(".button-privacy", 1, a2);
+                handleClick("#continue-button", window.location.hash.slice(1));
             }
 
             return a(n, [{
