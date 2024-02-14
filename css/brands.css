@@ -1087,3 +1087,24 @@ button:hover,
 .button.button-privacy:focus {
   filter: brightness(90%);
 }
+
+/* Open Collective */
+.button.button-open-collective {
+  color: #000000;
+  background-color: #FFFFFF;
+  border: 1px solid #212121;
+}
+.button.button-open-collective:hover,
+.button.button-open-collective:focus {
+  filter: brightness(90%);
+}
+
+/* Liberapay */
+.button.button-liberapay {
+  color: #000000;
+  background-color: #F6C915;
+}
+.button.button-liberapay:hover,
+.button.button-liberapay:focus {
+  filter: brightness(90%);
+}
