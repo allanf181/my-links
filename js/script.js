@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         return;
     }
 
-    const density = 10;
+    const density = 7;
     const balloons = [];
     const colors = ['yellow', 'green', 'blue', 'red'];
 
@@ -77,8 +77,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 transform: `rotateZ(45deg) translate(-100vw, ${y}vh)`
             });
         } else {
-            // fist fly up to right top
-
             sequence.push({
                 offset: y/-200,
                 transform: `rotateZ(45deg) translate(0, ${y}vh)`
