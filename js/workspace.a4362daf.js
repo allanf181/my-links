@@ -421,7 +421,7 @@ parcelRequire = function (e, r, t, n) {
                 let spanElement = document.createElement("span");
                 spanElement.textContent = "Preparing...";
 
-                handleAudioPlay(0, a, "Q29uZ2Eh");
+                handleAudioPlay(0, a, "U2FtYmEh"); //Q29uZ2Eh
                 handleAudioPlay(1, a2, "WW91J3ZlIGJlZW4gcmlja3JvbGxlZCE=");
 
                 handleClick("#continue-button", window.location.hash.slice(1));
